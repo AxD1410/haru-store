@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>~あ[ Haru Store ]~ Sage Vintage Shop</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=VT323&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="header.css">
+</head>
+<body>
+
+  <!-- Reloj de carga -->
+  <div id="loading-spinner" class="spinner">
+    <div class="spinner__clock">⏳</div>
+    <span class="spinner__text">Cargando Haru Store...</span>
+  </div>
+
+  <div class="window-frame">
+
+    <!-- Header y navegación con BEM -->
+    <header class="site-header">
+      <div class="site-header__bar">
+        <div class="header-brand">
+          <span class="header-brand__icon">🧸</span>
+          <span class="header-brand__title">~あ[ Haru Store ]</span>
+        </div>
+
+        <div class="site-header__controls">
+          <button type="button" class="site-header__btn site-header__btn--min">—</button>
+          <button type="button" class="site-header__btn site-header__btn--max">□</button>
+          <button type="button" class="site-header__btn site-header__btn--close">✕</button>
+        </div>
+      </div>
+
+      <nav class="header-nav" aria-label="Barra principal de la tienda">
+        <div class="header-nav__left">
+          <button
+            type="button"
+            class="header-nav__menu-btn"
+            onclick="toggleSidebar()"
+            aria-label="Abrir o cerrar menú lateral"
+          >☰</button>
+          <span class="header-nav__status header-nav__status--open">🟢 TIENDA ABIERTA</span>
+        </div>
+
+        <div class="header-search">
+          <label for="searchInput" class="header-search__icon">🔍</label>
+          <input
+            type="text"
+            id="searchInput"
+            class="header-search__input"
+            placeholder="Buscar ositos..."
+            oninput="filterProducts()"
+          >
+        </div>
+
+        <div class="header-nav__actions">
+          <button type="button" class="header-nav__cart" onclick="toggleCart()">
+            🛒 Carrito (<span class="header-nav__count" id="cartCount">0</span>)
+          </button>
+          <button type="button" class="btn btn--admin" onclick="openAdminModal()" title="Panel Admin">⚙️</button>
+        </div>
+      </nav>
+    </header>
+
+    <!-- Layout principal: Izquierda + Derecha -->
+    <div class="app-layout">
+
+      <!-- Barra lateral izquierda desplegable -->
+      <aside class="sidebar sidebar--open" id="sidebarMenu">
+        <section class="widget profile-card">
+          <div class="profile-card__avatar">
+            <img src="https://images.unsplash.com/photo-1559454403-b8fb88521f11?w=200&auto=format&fit=crop" alt="Haru Avatar" class="profile-card__img">
+          </div>
+          <div class="profile-card__info">
+            <h2 class="profile-card__name">~あ[ Haru ]</h2>
+            <p class="profile-card__status">Venta de ositos 24/7</p>
+            <span class="profile-card__tag">MOOD: Cozy</span>
+          </div>
+        </section>
+
+        <nav class="widget categories" aria-label="Categorías de productos">
+          <h2 class="widget__title">Categorías</h2>
+          <div class="categories__list">
+            <button type="button" class="categories__btn categories__btn--active" onclick="filterCategory('all', this)">Todos los osos</button>
+            <button type="button" class="categories__btn" onclick="filterCategory('videojuegos', this)">Peluches de videojuegos</button>
+            <button type="button" class="categories__btn" onclick="filterCategory('llaveros', this)">Llaveros</button>
+            <button type="button" class="categories__btn" onclick="filterCategory('combos', this)">Combos</button>
+            <button type="button" class="categories__btn" onclick="filterCategory('liquidacion', this)">Liquidación</button>
+          </div>
+        </nav>
+
+        <section class="widget music-player">
+          <h2 class="widget__title">My Favorite Music</h2>
+          <div class="music-player__content">
+            <div class="music-player__vinyl" id="vinyl">
+              <div class="music-player__center"></div>
+            </div>
+            <div class="music-player__meta">
+              <div class="music-player__song">Getting Over You</div>
+              <div class="music-player__artist">Hot Freaks</div>
+              <div class="music-player__eq" id="equalizer">
+                <span class="music-player__bar"></span>
+                <span class="music-player__bar"></span>
+                <span class="music-player__bar"></span>
+              </div>
+            </div>
+          </div>
+          <button type="button" class="btn btn--block" onclick="toggleMusic()">PLAY / PAUSE</button>
+        </section>
+
+        <section class="widget">
+          <h2 class="widget__title">Características</h2>
+          <div class="widget__text">
+            <p>✓ Osos de distintos personajes.</p>
+            <p>✓ Con etiqueta original 100%.</p>
+            <p>✕ No envíos con mal olor.</p>
+            <p>✓ Envíos a toda Bolivia.</p>
+          </div>
+        </section>
+
+        <section class="widget visit-counter">
+          <span class="visit-counter__label">VISITAS A HARU STORE:</span>
+          <span class="visit-counter__digits">004829</span>
+        </section>
+      </aside>
+
+      <!-- Contenido derecho -->
+      <main class="main-content">
+
+        <section class="hero-banner">
+          <div class="hero-banner__box">
+            <h1 class="hero-banner__title">~ Clásicos ~</h1>
+            <p class="hero-banner__subtitle">Los compañeros de siempre, listos para un abrazo.</p>
+          </div>
+        </section>
+
+        <section class="catalog">
+          <div class="catalog__header">
+            <h2 class="catalog__title">Catálogo Disponible</h2>
+            <span class="catalog__count" id="productCount">Cargando...</span>
+          </div>
+
+          <div class="catalog__grid" id="productsGrid"></div>
+        </section>
+
+        <!-- Se acomoda automáticamente debajo del catálogo -->
+        <section class="info-grid">
+          <article class="widget info-grid__card">
+            <h2 class="widget__title">Osos y Peluches</h2>
+            <p class="widget__text">Ositos de peluche de distintos personajes, llaveros y combos con etiqueta original.</p>
+          </article>
+          <article class="widget info-grid__card">
+            <h2 class="widget__title">Tipo de viaje</h2>
+            <p class="widget__text">Envíos a toda Bolivia y entregas en paquetería de El Alto y La Paz.</p>
+          </article>
+        </section>
+
+      </main>
+    </div>
+
+    <!-- Carrito lateral -->
+    <aside class="cart-drawer" id="cartDrawer" aria-label="Carrito de compras">
+      <div class="cart-drawer__header">
+        <h2 class="cart-drawer__title">Tu Carrito Cozy</h2>
+        <button type="button" class="cart-drawer__close" onclick="toggleCart()">✕</button>
+      </div>
+      <div class="cart-drawer__items" id="cartItems"></div>
+      <div class="cart-drawer__footer">
+        <div class="cart-drawer__total">
+          <span>Total:</span>
+          <span id="cartTotal">$0.00</span>
+        </div>
+        <button type="button" class="btn btn--whatsapp btn--block" onclick="sendWhatsAppCartOrder()">
+          Enviar pedido por WhatsApp
+        </button>
+      </div>
+    </aside>
+
+  </div>
+
+  <!-- Modal Detalle -->
+  <div class="modal" id="productModal">
+    <div class="modal__box modal__box--terminal">
+      <div class="modal__header">
+        <h2 class="modal__title" id="modalTitle">Detalle del Osito</h2>
+        <button type="button" class="modal__close" onclick="closeProductModal()">✕</button>
+      </div>
+      <div class="modal__grid">
+        <img id="modalImage" src="" alt="Producto" class="modal__img">
+        <div class="modal__details">
+          <p id="modalDesc" class="modal__desc"></p>
+          <div class="modal__price" id="modalPrice">$0.00</div>
+          <button type="button" class="btn btn--terminal btn--block" onclick="addModalToCart()">
+            Agregar al Carrito
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal Admin -->
+  <div class="modal" id="adminModal">
+    <div class="modal__box modal__box--terminal modal__box--narrow">
+      <div class="modal__header">
+        <h2 class="modal__title">Panel Admin</h2>
+        <button type="button" class="modal__close" onclick="closeAdminModal()">✕</button>
+      </div>
+
+      <div id="adminLoginForm" class="admin-form">
+        <p class="modal__desc">Ingresa tus datos:</p>
+        <input type="email" id="adminEmail" placeholder="Correo" class="admin-form__input">
+        <input type="password" id="adminPassword" placeholder="Contraseña" class="admin-form__input">
+        <button type="button" class="btn btn--block" onclick="loginAdmin()">Iniciar Sesión</button>
+      </div>
+
+      <div id="adminPanel" class="admin-panel" style="display: none;">
+        <p class="modal__desc">✅ Sesión iniciada correctamente.</p>
+        <button type="button" class="btn btn--block" onclick="logoutAdmin()">Cerrar Sesión</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
