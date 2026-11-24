@@ -3,120 +3,120 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>~あ[ Haru Store ]~ Sage Vintage Shop</title>
+  <title>~あ[ Haru Store ]~ Tienda Vintage Verde Salvia</title>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=VT323&display=swap" rel="stylesheet">
 
-  <link rel="stylesheet" href="styles.css">
-  <link rel="stylesheet" href="header.css">
+  <!-- Orquestador principal de estilos -->
+  <link rel="stylesheet" href="css/estilos.css">
 </head>
 <body>
 
-  <!-- Reloj de carga -->
-  <div id="loading-spinner" class="spinner">
-    <div class="spinner__clock">⏳</div>
-    <span class="spinner__text">Cargando Haru Store...</span>
+  <!-- Pantalla de carga con spinner renovado -->
+  <div id="pantallaCarga" class="cargador">
+    <div class="cargador__aro" aria-hidden="true"></div>
+    <span class="cargador__texto">Cargando Haru Store...</span>
   </div>
 
-  <div class="window-frame">
+  <div class="marco-ventana">
 
-    <!-- Header y navegación con BEM -->
-    <header class="site-header">
-      <div class="site-header__bar">
-        <div class="header-brand">
-          <span class="header-brand__icon">🧸</span>
-          <span class="header-brand__title">~あ[ Haru Store ]</span>
+    <!-- Cabecera, marca y navegación con BEM -->
+    <header class="cabecera">
+      <div class="cabecera__barra">
+        <div class="marca">
+          <span class="marca__icono" aria-hidden="true">🧸</span>
+          <span class="marca__titulo">~あ[ Haru Store ]</span>
         </div>
 
-        <div class="site-header__controls">
-          <button type="button" class="site-header__btn site-header__btn--min">—</button>
-          <button type="button" class="site-header__btn site-header__btn--max">□</button>
-          <button type="button" class="site-header__btn site-header__btn--close">✕</button>
+        <div class="cabecera__controles">
+          <button type="button" class="cabecera__boton cabecera__boton--minimizar" aria-label="Minimizar">—</button>
+          <button type="button" class="cabecera__boton cabecera__boton--maximizar" aria-label="Maximizar">□</button>
+          <button type="button" class="cabecera__boton cabecera__boton--cerrar" aria-label="Cerrar">✕</button>
         </div>
       </div>
 
-      <nav class="header-nav" aria-label="Barra principal de la tienda">
-        <div class="header-nav__left">
+      <nav class="navegacion" aria-label="Barra principal de la tienda">
+        <div class="navegacion__izquierda">
           <button
             type="button"
-            class="header-nav__menu-btn"
-            onclick="toggleSidebar()"
+            class="navegacion__boton-menu"
+            onclick="alternarBarraLateral()"
             aria-label="Abrir o cerrar menú lateral"
           >☰</button>
-          <span class="header-nav__status header-nav__status--open">🟢 TIENDA ABIERTA</span>
+          <span class="navegacion__estado navegacion__estado--abierta">🟢 TIENDA ABIERTA</span>
         </div>
 
-        <div class="header-search">
-          <label for="searchInput" class="header-search__icon">🔍</label>
+        <div class="buscador">
+          <label for="entradaBusqueda" class="buscador__icono">🔍</label>
           <input
             type="text"
-            id="searchInput"
-            class="header-search__input"
+            id="entradaBusqueda"
+            class="buscador__entrada"
             placeholder="Buscar ositos..."
-            oninput="filterProducts()"
+            oninput="filtrarProductos()"
           >
         </div>
 
-        <div class="header-nav__actions">
-          <button type="button" class="header-nav__cart" onclick="toggleCart()">
-            🛒 Carrito (<span class="header-nav__count" id="cartCount">0</span>)
+        <div class="navegacion__acciones">
+          <button type="button" class="navegacion__carrito" onclick="alternarCarrito()">
+            🛒 Carrito (<span class="navegacion__contador" id="contadorCarrito">0</span>)
           </button>
-          <button type="button" class="btn btn--admin" onclick="openAdminModal()" title="Panel Admin">⚙️</button>
+          <button type="button" class="boton boton--admin" onclick="abrirModalAdmin()" title="Panel Admin">⚙️</button>
         </div>
       </nav>
     </header>
 
-    <!-- Layout principal: Izquierda + Derecha -->
-    <div class="app-layout">
+    <!-- Diseño principal: Barra lateral + Sección principal -->
+    <div class="diseno-tienda">
 
       <!-- Barra lateral izquierda desplegable -->
-      <aside class="sidebar sidebar--open" id="sidebarMenu">
-        <section class="widget profile-card">
-          <div class="profile-card__avatar">
-            <img src="https://images.unsplash.com/photo-1559454403-b8fb88521f11?w=200&auto=format&fit=crop" alt="Haru Avatar" class="profile-card__img">
+      <aside class="barra-lateral barra-lateral--abierta" id="barraLateral">
+        <section class="bloque-lateral tarjeta-perfil">
+          <div class="tarjeta-perfil__avatar">
+            <img src="https://images.unsplash.com/photo-1559454403-b8fb88521f11?w=200&auto=format&fit=crop" alt="Avatar de Haru" class="tarjeta-perfil__imagen">
           </div>
-          <div class="profile-card__info">
-            <h2 class="profile-card__name">~あ[ Haru ]</h2>
-            <p class="profile-card__status">Venta de ositos 24/7</p>
-            <span class="profile-card__tag">MOOD: Cozy</span>
+          <div class="tarjeta-perfil__info">
+            <h2 class="tarjeta-perfil__nombre">~あ[ Haru ]</h2>
+            <p class="tarjeta-perfil__estado">Venta de ositos 24/7</p>
+            <span class="tarjeta-perfil__etiqueta">ESTADO: Acogedor</span>
           </div>
         </section>
 
-        <nav class="widget categories" aria-label="Categorías de productos">
-          <h2 class="widget__title">Categorías</h2>
-          <div class="categories__list">
-            <button type="button" class="categories__btn categories__btn--active" onclick="filterCategory('all', this)">Todos los osos</button>
-            <button type="button" class="categories__btn" onclick="filterCategory('videojuegos', this)">Peluches de videojuegos</button>
-            <button type="button" class="categories__btn" onclick="filterCategory('llaveros', this)">Llaveros</button>
-            <button type="button" class="categories__btn" onclick="filterCategory('combos', this)">Combos</button>
-            <button type="button" class="categories__btn" onclick="filterCategory('liquidacion', this)">Liquidación</button>
+        <nav class="bloque-lateral categorias" aria-label="Categorías de productos">
+          <h2 class="bloque-lateral__titulo">Categorías</h2>
+          <div class="categorias__lista">
+            <button type="button" class="categorias__boton categorias__boton--activa" onclick="filtrarCategoria('all', this)">Todos los osos</button>
+            <button type="button" class="categorias__boton" onclick="filtrarCategoria('videojuegos', this)">Peluches de videojuegos</button>
+            <button type="button" class="categorias__boton" onclick="filtrarCategoria('llaveros', this)">Llaveros</button>
+            <button type="button" class="categorias__boton" onclick="filtrarCategoria('combos', this)">Combos</button>
+            <button type="button" class="categorias__boton" onclick="filtrarCategoria('liquidacion', this)">Liquidación</button>
           </div>
         </nav>
 
-        <section class="widget music-player">
-          <h2 class="widget__title">My Favorite Music</h2>
-          <div class="music-player__content">
-            <div class="music-player__vinyl" id="vinyl">
-              <div class="music-player__center"></div>
+        <section class="bloque-lateral reproductor">
+          <h2 class="bloque-lateral__titulo">Mi Música Favorita</h2>
+          <div class="reproductor__contenido">
+            <div class="reproductor__vinilo" id="vinilo">
+              <div class="reproductor__centro"></div>
             </div>
-            <div class="music-player__meta">
-              <div class="music-player__song">Getting Over You</div>
-              <div class="music-player__artist">Hot Freaks</div>
-              <div class="music-player__eq" id="equalizer">
-                <span class="music-player__bar"></span>
-                <span class="music-player__bar"></span>
-                <span class="music-player__bar"></span>
+            <div class="reproductor__datos">
+              <div class="reproductor__cancion">Getting Over You</div>
+              <div class="reproductor__artista">Hot Freaks</div>
+              <div class="reproductor__ecualizador" id="ecualizador">
+                <span class="reproductor__barra"></span>
+                <span class="reproductor__barra"></span>
+                <span class="reproductor__barra"></span>
               </div>
             </div>
           </div>
-          <button type="button" class="btn btn--block" onclick="toggleMusic()">PLAY / PAUSE</button>
+          <button type="button" class="boton boton--ancho-completo" onclick="alternarMusica()">REPRODUCIR / PAUSAR</button>
         </section>
 
-        <section class="widget">
-          <h2 class="widget__title">Características</h2>
-          <div class="widget__text">
+        <section class="bloque-lateral">
+          <h2 class="bloque-lateral__titulo">Características</h2>
+          <div class="bloque-lateral__texto">
             <p>✓ Osos de distintos personajes.</p>
             <p>✓ Con etiqueta original 100%.</p>
             <p>✕ No envíos con mal olor.</p>
@@ -124,40 +124,40 @@
           </div>
         </section>
 
-        <section class="widget visit-counter">
-          <span class="visit-counter__label">VISITAS A HARU STORE:</span>
-          <span class="visit-counter__digits">004829</span>
+        <section class="bloque-lateral contador-visitas">
+          <span class="contador-visitas__etiqueta">VISITAS A HARU STORE:</span>
+          <span class="contador-visitas__digitos">004829</span>
         </section>
       </aside>
 
-      <!-- Contenido derecho -->
-      <main class="main-content">
+      <!-- Sección principal derecha -->
+      <main class="seccion-principal">
 
-        <section class="hero-banner">
-          <div class="hero-banner__box">
-            <h1 class="hero-banner__title">~ Clásicos ~</h1>
-            <p class="hero-banner__subtitle">Los compañeros de siempre, listos para un abrazo.</p>
+        <section class="portada">
+          <div class="portada__caja">
+            <h1 class="portada__titulo">~ Clásicos ~</h1>
+            <p class="portada__subtitulo">Los compañeros de siempre, listos para un abrazo.</p>
           </div>
         </section>
 
-        <section class="catalog">
-          <div class="catalog__header">
-            <h2 class="catalog__title">Catálogo Disponible</h2>
-            <span class="catalog__count" id="productCount">Cargando...</span>
+        <section class="catalogo">
+          <div class="catalogo__encabezado">
+            <h2 class="catalogo__titulo">Catálogo Disponible</h2>
+            <span class="catalogo__contador" id="contadorProductos">Cargando...</span>
           </div>
 
-          <div class="catalog__grid" id="productsGrid"></div>
+          <div class="catalogo__cuadricula" id="cuadriculaProductos"></div>
         </section>
 
         <!-- Se acomoda automáticamente debajo del catálogo -->
-        <section class="info-grid">
-          <article class="widget info-grid__card">
-            <h2 class="widget__title">Osos y Peluches</h2>
-            <p class="widget__text">Ositos de peluche de distintos personajes, llaveros y combos con etiqueta original.</p>
+        <section class="informacion">
+          <article class="bloque-lateral informacion__tarjeta">
+            <h2 class="bloque-lateral__titulo">Osos y Peluches</h2>
+            <p class="bloque-lateral__texto">Ositos de peluche de distintos personajes, llaveros y combos con etiqueta original.</p>
           </article>
-          <article class="widget info-grid__card">
-            <h2 class="widget__title">Tipo de viaje</h2>
-            <p class="widget__text">Envíos a toda Bolivia y entregas en paquetería de El Alto y La Paz.</p>
+          <article class="bloque-lateral informacion__tarjeta">
+            <h2 class="bloque-lateral__titulo">Tipo de viaje</h2>
+            <p class="bloque-lateral__texto">Envíos a toda Bolivia y entregas en paquetería de El Alto y La Paz.</p>
           </article>
         </section>
 
@@ -165,18 +165,18 @@
     </div>
 
     <!-- Carrito lateral -->
-    <aside class="cart-drawer" id="cartDrawer" aria-label="Carrito de compras">
-      <div class="cart-drawer__header">
-        <h2 class="cart-drawer__title">Tu Carrito Cozy</h2>
-        <button type="button" class="cart-drawer__close" onclick="toggleCart()">✕</button>
+    <aside class="carrito" id="panelCarrito" aria-label="Carrito de compras">
+      <div class="carrito__encabezado">
+        <h2 class="carrito__titulo">Tu Carrito Acogedor</h2>
+        <button type="button" class="carrito__cerrar" onclick="alternarCarrito()" aria-label="Cerrar carrito">✕</button>
       </div>
-      <div class="cart-drawer__items" id="cartItems"></div>
-      <div class="cart-drawer__footer">
-        <div class="cart-drawer__total">
+      <div class="carrito__elementos" id="elementosCarrito"></div>
+      <div class="carrito__pie">
+        <div class="carrito__total">
           <span>Total:</span>
-          <span id="cartTotal">$0.00</span>
+          <span id="totalCarrito">$0.00</span>
         </div>
-        <button type="button" class="btn btn--whatsapp btn--block" onclick="sendWhatsAppCartOrder()">
+        <button type="button" class="boton boton--whatsapp boton--ancho-completo" onclick="enviarPedidoWhatsApp()">
           Enviar pedido por WhatsApp
         </button>
       </div>
@@ -184,19 +184,19 @@
 
   </div>
 
-  <!-- Modal Detalle -->
-  <div class="modal" id="productModal">
-    <div class="modal__box modal__box--terminal">
-      <div class="modal__header">
-        <h2 class="modal__title" id="modalTitle">Detalle del Osito</h2>
-        <button type="button" class="modal__close" onclick="closeProductModal()">✕</button>
+  <!-- Ventana modal de detalle de producto -->
+  <div class="ventana" id="modalProducto">
+    <div class="ventana__caja ventana__caja--terminal">
+      <div class="ventana__encabezado">
+        <h2 class="ventana__titulo" id="tituloModal">Detalle del Osito</h2>
+        <button type="button" class="ventana__cerrar" onclick="cerrarModalProducto()" aria-label="Cerrar ventana">✕</button>
       </div>
-      <div class="modal__grid">
-        <img id="modalImage" src="" alt="Producto" class="modal__img">
-        <div class="modal__details">
-          <p id="modalDesc" class="modal__desc"></p>
-          <div class="modal__price" id="modalPrice">$0.00</div>
-          <button type="button" class="btn btn--terminal btn--block" onclick="addModalToCart()">
+      <div class="ventana__cuadricula">
+        <img id="imagenModal" src="" alt="Producto" class="ventana__imagen">
+        <div class="ventana__detalles">
+          <p id="descripcionModal" class="ventana__descripcion"></p>
+          <div class="ventana__precio" id="precioModal">$0.00</div>
+          <button type="button" class="boton boton--terminal boton--ancho-completo" onclick="agregarDesdeModal()">
             Agregar al Carrito
           </button>
         </div>
@@ -204,24 +204,24 @@
     </div>
   </div>
 
-  <!-- Modal Admin -->
-  <div class="modal" id="adminModal">
-    <div class="modal__box modal__box--terminal modal__box--narrow">
-      <div class="modal__header">
-        <h2 class="modal__title">Panel Admin</h2>
-        <button type="button" class="modal__close" onclick="closeAdminModal()">✕</button>
+  <!-- Ventana modal de administración -->
+  <div class="ventana" id="modalAdmin">
+    <div class="ventana__caja ventana__caja--terminal ventana__caja--estrecha">
+      <div class="ventana__encabezado">
+        <h2 class="ventana__titulo">Panel Admin</h2>
+        <button type="button" class="ventana__cerrar" onclick="cerrarModalAdmin()" aria-label="Cerrar ventana">✕</button>
       </div>
 
-      <div id="adminLoginForm" class="admin-form">
-        <p class="modal__desc">Ingresa tus datos:</p>
-        <input type="email" id="adminEmail" placeholder="Correo" class="admin-form__input">
-        <input type="password" id="adminPassword" placeholder="Contraseña" class="admin-form__input">
-        <button type="button" class="btn btn--block" onclick="loginAdmin()">Iniciar Sesión</button>
+      <div id="formularioAdmin" class="formulario-admin">
+        <p class="ventana__descripcion">Ingresa tus datos:</p>
+        <input type="email" id="correoAdmin" placeholder="Correo" class="formulario-admin__entrada">
+        <input type="password" id="contrasenaAdmin" placeholder="Contraseña" class="formulario-admin__entrada">
+        <button type="button" class="boton boton--ancho-completo" onclick="iniciarSesionAdmin()">Iniciar Sesión</button>
       </div>
 
-      <div id="adminPanel" class="admin-panel" style="display: none;">
-        <p class="modal__desc">✅ Sesión iniciada correctamente.</p>
-        <button type="button" class="btn btn--block" onclick="logoutAdmin()">Cerrar Sesión</button>
+      <div id="panelAdmin" class="panel-admin" style="display: none;">
+        <p class="ventana__descripcion">✅ Sesión iniciada correctamente.</p>
+        <button type="button" class="boton boton--ancho-completo" onclick="cerrarSesionAdmin()">Cerrar Sesión</button>
       </div>
     </div>
   </div>
