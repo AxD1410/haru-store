@@ -1,226 +1,234 @@
-const products = [
+const productos = [
   {
     id: 1,
-    name: "~ Haru Matcha Bear ~",
-    category: "videojuegos",
-    price: 24.99,
-    img: "https://images.unsplash.com/photo-1559454403-b8fb88521f11?w=400&auto=format&fit=crop",
-    desc: "Oso de felpa verde salvia tradicional, súper suave."
+    nombre: "~ Haru Matcha Bear ~",
+    categoria: "videojuegos",
+    precio: 24.99,
+    imagen: "https://images.unsplash.com/photo-1559454403-b8fb88521f11?w=400&auto=format&fit=crop",
+    descripcion: "Oso de felpa verde salvia tradicional, súper suave."
   },
   {
     id: 2,
-    name: "~ Haru Moss Mini Llavero ~",
-    category: "llaveros",
-    price: 12.50,
-    img: "https://images.unsplash.com/photo-1562157873-818bc0726f68?w=400&auto=format&fit=crop",
-    desc: "Tamaño bolsillo con enganche de metal vintage."
+    nombre: "~ Haru Moss Mini Llavero ~",
+    categoria: "llaveros",
+    precio: 12.50,
+    imagen: "https://images.unsplash.com/photo-1562157873-818bc0726f68?w=400&auto=format&fit=crop",
+    descripcion: "Tamaño bolsillo con enganche de metal vintage."
   },
   {
     id: 3,
-    name: "~ Haru Fairy Forest Bear ~",
-    category: "combos",
-    price: 32.00,
-    img: "https://images.unsplash.com/photo-1533738363-b7f9aef128ce?w=400&auto=format&fit=crop",
-    desc: "Combo edición limitada con alitas de duende tejido."
+    nombre: "~ Haru Fairy Forest Bear ~",
+    categoria: "combos",
+    precio: 32.00,
+    imagen: "https://images.unsplash.com/photo-1533738363-b7f9aef128ce?w=400&auto=format&fit=crop",
+    descripcion: "Combo edición limitada con alitas de duende tejido."
   },
   {
     id: 4,
-    name: "~ Cardigan Verde para Oso ~",
-    category: "liquidacion",
-    price: 9.99,
-    img: "https://images.unsplash.com/photo-1584917865442-de89df76afd3?w=400&auto=format&fit=crop",
-    desc: "Suéter tejido a mano a la medida del oso clásico."
+    nombre: "~ Cardigan Verde para Oso ~",
+    categoria: "liquidacion",
+    precio: 9.99,
+    imagen: "https://images.unsplash.com/photo-1584917865442-de89df76afd3?w=400&auto=format&fit=crop",
+    descripcion: "Suéter tejido a mano a la medida del oso clásico."
   },
   {
     id: 5,
-    name: "~ Haru Clover Honey Bear ~",
-    category: "videojuegos",
-    price: 26.50,
-    img: "https://images.unsplash.com/photo-1556012018-50c5c0da73bf?w=400&auto=format&fit=crop",
-    desc: "Color crema con detalles de tréboles bordados."
+    nombre: "~ Haru Clover Honey Bear ~",
+    categoria: "videojuegos",
+    precio: 26.50,
+    imagen: "https://images.unsplash.com/photo-1556012018-50c5c0da73bf?w=400&auto=format&fit=crop",
+    descripcion: "Color crema con detalles de tréboles bordados."
   },
   {
     id: 6,
-    name: "~ Haru Froggy Hat Bear ~",
-    category: "combos",
-    price: 29.99,
-    img: "https://images.unsplash.com/photo-1544717305-2782549b5136?w=400&auto=format&fit=crop",
-    desc: "Combo oso con sombrerito tejido de rana + llavero."
+    nombre: "~ Haru Froggy Hat Bear ~",
+    categoria: "combos",
+    precio: 29.99,
+    imagen: "https://images.unsplash.com/photo-1544717305-2782549b5136?w=400&auto=format&fit=crop",
+    descripcion: "Combo oso con sombrerito tejido de rana + llavero."
   }
 ];
 
-let cart = [];
-let currentCategory = 'all';
-let selectedProduct = null;
-let isPlaying = false;
-const WHATSAPP_NUMBER = "59170000000";
+let carrito = [];
+let categoriaActual = "all";
+let productoSeleccionado = null;
+let reproduciendoMusica = false;
+const NUMERO_WHATSAPP = "59170000000";
 
-window.addEventListener('load', () => {
-  document.getElementById('loading-spinner').style.display = 'none';
+window.addEventListener("load", () => {
+  const cargador = document.getElementById("pantallaCarga");
+  if (cargador) {
+    cargador.style.display = "none";
+  }
 });
 
-function toggleSidebar() {
-  document.getElementById('sidebarMenu').classList.toggle('sidebar--open');
+function alternarBarraLateral() {
+  document.getElementById("barraLateral").classList.toggle("barra-lateral--abierta");
 }
 
-function renderProducts(list) {
-  const grid = document.getElementById('productsGrid');
-  const count = document.getElementById('productCount');
+function renderizarProductos(lista) {
+  const cuadricula = document.getElementById("cuadriculaProductos");
+  const contador = document.getElementById("contadorProductos");
 
-  grid.innerHTML = '';
-  count.textContent = `Mostrando ${list.length} productos`;
+  cuadricula.innerHTML = "";
+  contador.textContent = `Mostrando ${lista.length} productos`;
 
-  if (list.length === 0) {
-    grid.innerHTML = '<p>No se encontraron ositos :(</p>';
+  if (lista.length === 0) {
+    cuadricula.innerHTML = "<p>No se encontraron ositos :(</p>";
     return;
   }
 
-  list.forEach(p => {
-    grid.innerHTML += `
-      <article class="product-card">
-        <img src="${p.img}" alt="${p.name}" class="product-card__img" onclick="openProductModal(${p.id})">
-        <h3 class="product-card__name" onclick="openProductModal(${p.id})">${p.name}</h3>
-        <p class="product-card__desc">${p.desc}</p>
-        <div class="product-card__bottom">
-          <span class="product-card__price">$${p.price.toFixed(2)}</span>
-          <button type="button" class="btn" onclick="addToCart(${p.id})">+ Agregar</button>
+  lista.forEach((producto) => {
+    cuadricula.innerHTML += `
+      <article class="tarjeta-producto">
+        <img src="${producto.imagen}" alt="${producto.nombre}" class="tarjeta-producto__imagen" onclick="abrirModalProducto(${producto.id})">
+        <h3 class="tarjeta-producto__nombre" onclick="abrirModalProducto(${producto.id})">${producto.nombre}</h3>
+        <p class="tarjeta-producto__descripcion">${producto.descripcion}</p>
+        <div class="tarjeta-producto__pie">
+          <span class="tarjeta-producto__precio">$${producto.precio.toFixed(2)}</span>
+          <button type="button" class="boton" onclick="agregarAlCarrito(${producto.id})">+ Agregar</button>
         </div>
       </article>
     `;
   });
 }
 
-function filterCategory(cat, btn) {
-  currentCategory = cat;
-  document.querySelectorAll('.categories__btn').forEach(b => b.classList.remove('categories__btn--active'));
-  btn.classList.add('categories__btn--active');
-  filterProducts();
+function filtrarCategoria(categoria, boton) {
+  categoriaActual = categoria;
+  document.querySelectorAll(".categorias__boton").forEach((b) => {
+    b.classList.remove("categorias__boton--activa");
+  });
+  boton.classList.add("categorias__boton--activa");
+  filtrarProductos();
 }
 
-function filterProducts() {
-  const text = document.getElementById('searchInput').value.toLowerCase();
+function filtrarProductos() {
+  const texto = document.getElementById("entradaBusqueda").value.toLowerCase();
 
-  const filtered = products.filter(p => {
-    const matchCat = currentCategory === 'all' || p.category === currentCategory;
-    const matchText = p.name.toLowerCase().includes(text) || p.desc.toLowerCase().includes(text);
-    return matchCat && matchText;
+  const filtrados = productos.filter((producto) => {
+    const coincideCategoria = categoriaActual === "all" || producto.categoria === categoriaActual;
+    const coincideTexto =
+      producto.nombre.toLowerCase().includes(texto) ||
+      producto.descripcion.toLowerCase().includes(texto);
+    return coincideCategoria && coincideTexto;
   });
 
-  renderProducts(filtered);
+  renderizarProductos(filtrados);
 }
 
-function openProductModal(id) {
-  selectedProduct = products.find(p => p.id === id);
-  document.getElementById('modalTitle').textContent = selectedProduct.name;
-  document.getElementById('modalImage').src = selectedProduct.img;
-  document.getElementById('modalDesc').textContent = selectedProduct.desc;
-  document.getElementById('modalPrice').textContent = `$${selectedProduct.price.toFixed(2)}`;
-  document.getElementById('productModal').classList.add('modal--active');
+function abrirModalProducto(id) {
+  productoSeleccionado = productos.find((p) => p.id === id);
+  document.getElementById("tituloModal").textContent = productoSeleccionado.nombre;
+  document.getElementById("imagenModal").src = productoSeleccionado.imagen;
+  document.getElementById("descripcionModal").textContent = productoSeleccionado.descripcion;
+  document.getElementById("precioModal").textContent = `$${productoSeleccionado.precio.toFixed(2)}`;
+  document.getElementById("modalProducto").classList.add("ventana--activa");
 }
 
-function closeProductModal() {
-  document.getElementById('productModal').classList.remove('modal--active');
+function cerrarModalProducto() {
+  document.getElementById("modalProducto").classList.remove("ventana--activa");
 }
 
-function addModalToCart() {
-  if (selectedProduct) {
-    addToCart(selectedProduct.id);
-    closeProductModal();
+function agregarDesdeModal() {
+  if (productoSeleccionado) {
+    agregarAlCarrito(productoSeleccionado.id);
+    cerrarModalProducto();
   }
 }
 
-function addToCart(id) {
-  const product = products.find(p => p.id === id);
-  const item = cart.find(i => i.id === id);
+function agregarAlCarrito(id) {
+  const producto = productos.find((p) => p.id === id);
+  const elemento = carrito.find((i) => i.id === id);
 
-  if (item) {
-    item.qty++;
+  if (elemento) {
+    elemento.cantidad++;
   } else {
-    cart.push({ ...product, qty: 1 });
+    carrito.push({ ...producto, cantidad: 1 });
   }
 
-  updateCartUI();
-  document.getElementById('cartDrawer').classList.add('cart-drawer--open');
+  actualizarInterfazCarrito();
+  document.getElementById("panelCarrito").classList.add("carrito--abierto");
 }
 
-function removeFromCart(index) {
-  cart.splice(index, 1);
-  updateCartUI();
+function quitarDelCarrito(indice) {
+  carrito.splice(indice, 1);
+  actualizarInterfazCarrito();
 }
 
-function updateCartUI() {
-  const container = document.getElementById('cartItems');
-  const count = document.getElementById('cartCount');
-  const totalEl = document.getElementById('cartTotal');
+function actualizarInterfazCarrito() {
+  const contenedor = document.getElementById("elementosCarrito");
+  const contador = document.getElementById("contadorCarrito");
+  const totalElemento = document.getElementById("totalCarrito");
 
-  container.innerHTML = '';
+  contenedor.innerHTML = "";
   let total = 0;
-  let qtyTotal = 0;
+  let cantidadTotal = 0;
 
-  cart.forEach((item, index) => {
-    total += item.price * item.qty;
-    qtyTotal += item.qty;
+  carrito.forEach((elemento, indice) => {
+    const subtotal = elemento.precio * elemento.cantidad;
+    total += subtotal;
+    cantidadTotal += elemento.cantidad;
 
-    container.innerHTML += `
-      <div class="cart-drawer__item">
+    contenedor.innerHTML += `
+      <div class="carrito__elemento">
         <div>
-          <div class="cart-drawer__item-title">${item.name} (x${item.qty})</div>
-          <div class="cart-drawer__item-price">$${(item.price * item.qty).toFixed(2)}</div>
+          <div class="carrito__titulo-elemento">${elemento.nombre} (x${elemento.cantidad})</div>
+          <div class="carrito__precio-elemento">$${subtotal.toFixed(2)}</div>
         </div>
-        <button type="button" class="btn" onclick="removeFromCart(${index})">✕</button>
+        <button type="button" class="boton" onclick="quitarDelCarrito(${indice})">✕</button>
       </div>
     `;
   });
 
-  count.textContent = qtyTotal;
-  totalEl.textContent = `$${total.toFixed(2)}`;
+  contador.textContent = cantidadTotal;
+  totalElemento.textContent = `$${total.toFixed(2)}`;
 }
 
-function toggleCart() {
-  document.getElementById('cartDrawer').classList.toggle('cart-drawer--open');
+function alternarCarrito() {
+  document.getElementById("panelCarrito").classList.toggle("carrito--abierto");
 }
 
-function sendWhatsAppCartOrder() {
-  if (cart.length === 0) {
+function enviarPedidoWhatsApp() {
+  if (carrito.length === 0) {
     alert("Tu carrito está vacío 🧸");
     return;
   }
 
   let total = 0;
-  let msg = "¡Hola Haru Store! 🌸 Quiero pedir:\n\n";
+  let mensaje = "¡Hola Haru Store! 🌸 Quiero pedir:\n\n";
 
-  cart.forEach((item, i) => {
-    const subtotal = item.price * item.qty;
+  carrito.forEach((elemento, i) => {
+    const subtotal = elemento.precio * elemento.cantidad;
     total += subtotal;
-    msg += `${i + 1}. ${item.name} (x${item.qty}) - $${subtotal.toFixed(2)}\n`;
+    mensaje += `${i + 1}. ${elemento.nombre} (x${elemento.cantidad}) - $${subtotal.toFixed(2)}\n`;
   });
 
-  msg += `\nTotal: $${total.toFixed(2)}`;
-  window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(msg)}`, '_blank');
+  mensaje += `\nTotal: $${total.toFixed(2)}`;
+  window.open(`https://wa.me/${NUMERO_WHATSAPP}?text=${encodeURIComponent(mensaje)}`, "_blank");
 }
 
-function toggleMusic() {
-  isPlaying = !isPlaying;
-  document.getElementById('vinyl').classList.toggle('music-player__vinyl--playing', isPlaying);
-  document.getElementById('equalizer').classList.toggle('music-player__eq--active', isPlaying);
+function alternarMusica() {
+  reproduciendoMusica = !reproduciendoMusica;
+  document.getElementById("vinilo").classList.toggle("reproductor__vinilo--reproduciendo", reproduciendoMusica);
+  document.getElementById("ecualizador").classList.toggle("reproductor__ecualizador--activo", reproduciendoMusica);
 }
 
-function openAdminModal() {
-  document.getElementById('adminModal').classList.add('modal--active');
+function abrirModalAdmin() {
+  document.getElementById("modalAdmin").classList.add("ventana--activa");
 }
 
-function closeAdminModal() {
-  document.getElementById('adminModal').classList.remove('modal--active');
+function cerrarModalAdmin() {
+  document.getElementById("modalAdmin").classList.remove("ventana--activa");
 }
 
-function loginAdmin() {
-  document.getElementById('adminLoginForm').style.display = 'none';
-  document.getElementById('adminPanel').style.display = 'block';
+function iniciarSesionAdmin() {
+  document.getElementById("formularioAdmin").style.display = "none";
+  document.getElementById("panelAdmin").style.display = "block";
 }
 
-function logoutAdmin() {
-  document.getElementById('adminLoginForm').style.display = 'block';
-  document.getElementById('adminPanel').style.display = 'none';
+function cerrarSesionAdmin() {
+  document.getElementById("formularioAdmin").style.display = "block";
+  document.getElementById("panelAdmin").style.display = "none";
 }
 
-renderProducts(products);
+renderizarProductos(productos);
