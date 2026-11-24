@@ -1,9 +1,9 @@
-.site-header {
+.cabecera {
   background-color: var(--bg-secondary);
   border-bottom: 2px solid var(--border-color);
 }
 
-.site-header__bar {
+.cabecera__barra {
   background-color: var(--border-color);
   color: var(--text-light);
   padding: 8px 15px;
@@ -12,12 +12,12 @@
   align-items: center;
 }
 
-.site-header__controls {
+.cabecera__controles {
   display: flex;
   gap: 6px;
 }
 
-.site-header__btn {
+.cabecera__boton {
   background-color: var(--bg-primary);
   color: var(--text-main);
   border: 1px solid var(--text-main);
@@ -27,27 +27,27 @@
   cursor: pointer;
 }
 
-.site-header__btn--close {
+.cabecera__boton--cerrar {
   font-weight: bold;
 }
 
-.header-brand {
+.marca {
   display: flex;
   align-items: center;
   gap: 8px;
 }
 
-.header-brand__icon {
+.marca__icono {
   font-size: 18px;
 }
 
-.header-brand__title {
+.marca__titulo {
   font-family: var(--font-pixel);
   font-size: 24px;
   font-weight: normal;
 }
 
-.header-nav {
+.navegacion {
   padding: 10px 15px;
   display: flex;
   flex-wrap: wrap;
@@ -56,13 +56,13 @@
   gap: 10px;
 }
 
-.header-nav__left {
+.navegacion__izquierda {
   display: flex;
   align-items: center;
   gap: 8px;
 }
 
-.header-nav__menu-btn {
+.navegacion__boton-menu {
   background-color: var(--bg-primary);
   color: var(--text-main);
   border: 2px solid var(--border-color);
@@ -73,11 +73,11 @@
   cursor: pointer;
 }
 
-.header-nav__menu-btn:hover {
+.navegacion__boton-menu:hover {
   background-color: var(--accent-green);
 }
 
-.header-nav__status {
+.navegacion__estado {
   padding: 4px 10px;
   border: 1.5px solid var(--border-color);
   border-radius: 15px;
@@ -85,16 +85,16 @@
   font-weight: bold;
 }
 
-.header-nav__status--open {
+.navegacion__estado--abierta {
   background-color: #CBE0C7;
 }
 
-.header-nav__actions {
+.navegacion__acciones {
   display: flex;
   gap: 8px;
 }
 
-.header-nav__cart {
+.navegacion__carrito {
   background-color: var(--accent-green);
   border: 2px solid var(--border-color);
   padding: 6px 12px;
@@ -104,7 +104,7 @@
   cursor: pointer;
 }
 
-.header-search {
+.buscador {
   display: flex;
   align-items: center;
   gap: 6px;
@@ -116,7 +116,7 @@
   max-width: 380px;
 }
 
-.header-search__input {
+.buscador__entrada {
   border: none;
   outline: none;
   width: 100%;
