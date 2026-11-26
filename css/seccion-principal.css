@@ -1,0 +1,110 @@
+/* Portada / Banner */
+.portada {
+  background-color: var(--acento-verde);
+  border: 2px solid var(--color-borde);
+  border-radius: 8px;
+  padding: 16px;
+  margin-bottom: 20px;
+}
+ 
+.portada__caja {
+  background-color: var(--fondo-secundario);
+  border: 2px solid var(--color-borde);
+  padding: 14px;
+  border-radius: 6px;
+}
+ 
+.portada__titulo {
+  font-family: var(--fuente-pixel);
+  font-size: 28px;
+  font-weight: normal;
+}
+ 
+.portada__subtitulo {
+  font-size: 12px;
+}
+ 
+/* Catálogo y tarjetas */
+.catalogo {
+  margin-bottom: 20px;
+}
+ 
+.catalogo__encabezado {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+ 
+.catalogo__titulo {
+  font-family: var(--fuente-pixel);
+  font-size: 24px;
+  font-weight: normal;
+}
+ 
+.catalogo__contador {
+  font-size: 11px;
+}
+ 
+.catalogo__cuadricula {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 15px;
+}
+ 
+.tarjeta-producto {
+  background-color: var(--fondo-secundario);
+  border: 2px solid var(--color-borde);
+  border-radius: 8px;
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+}
+ 
+.tarjeta-producto__imagen {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  border-radius: 6px;
+  border: 1.5px solid var(--color-borde);
+  object-fit: cover;
+  margin-bottom: 10px;
+  cursor: pointer;
+}
+ 
+.tarjeta-producto__nombre {
+  font-size: 13px;
+  font-weight: bold;
+  margin-bottom: 4px;
+  cursor: pointer;
+}
+ 
+.tarjeta-producto__descripcion {
+  font-size: 11px;
+  margin-bottom: 10px;
+  flex-grow: 1;
+}
+ 
+.tarjeta-producto__pie {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+ 
+.tarjeta-producto__precio {
+  font-family: var(--fuente-pixel);
+  font-size: 20px;
+  font-weight: bold;
+}
+ 
+/* Sección inferior: Osos y Peluches + Tipo de viaje */
+.informacion {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 15px;
+  margin-top: auto;
+}
+ 
+.informacion__tarjeta {
+  margin-bottom: 0;
+  height: 100%;
+}
