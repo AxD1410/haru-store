@@ -1,0 +1,129 @@
+.cabecera {
+  background-color: var(--bg-secondary);
+  border-bottom: 2px solid var(--border-color);
+}
+ 
+.cabecera__barra {
+  background-color: var(--border-color);
+  color: var(--text-light);
+  padding: 8px 15px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+ 
+.cabecera__controles {
+  display: flex;
+  gap: 6px;
+}
+ 
+.cabecera__boton {
+  background-color: var(--bg-primary);
+  color: var(--text-main);
+  border: 1px solid var(--text-main);
+  width: 22px;
+  height: 22px;
+  font-size: 12px;
+  cursor: pointer;
+}
+ 
+.cabecera__boton--cerrar {
+  font-weight: bold;
+}
+ 
+.marca {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+ 
+.marca__icono {
+  font-size: 18px;
+}
+ 
+.marca__titulo {
+  font-family: var(--font-pixel);
+  font-size: 24px;
+  font-weight: normal;
+}
+ 
+.navegacion {
+  padding: 10px 15px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+}
+ 
+.navegacion__izquierda {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+ 
+.navegacion__boton-menu {
+  background-color: var(--bg-primary);
+  color: var(--text-main);
+  border: 2px solid var(--border-color);
+  border-radius: 5px;
+  padding: 4px 10px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+}
+ 
+.navegacion__boton-menu:hover {
+  background-color: var(--accent-green);
+}
+ 
+.navegacion__estado {
+  padding: 4px 10px;
+  border: 1.5px solid var(--border-color);
+  border-radius: 15px;
+  font-size: 12px;
+  font-weight: bold;
+}
+ 
+.navegacion__estado--abierta {
+  background-color: #CBE0C7;
+}
+ 
+.navegacion__acciones {
+  display: flex;
+  gap: 8px;
+}
+ 
+.navegacion__carrito {
+  background-color: var(--accent-green);
+  border: 2px solid var(--border-color);
+  padding: 6px 12px;
+  font-family: var(--font-mono);
+  font-weight: bold;
+  border-radius: 5px;
+  cursor: pointer;
+}
+ 
+.buscador {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background-color: #FFFFFF;
+  border: 2px solid var(--border-color);
+  border-radius: 20px;
+  padding: 4px 12px;
+  flex-grow: 1;
+  max-width: 380px;
+}
+ 
+.buscador__icono {
+  font-size: 13px;
+}
+ 
+.buscador__entrada {
+  border: none;
+  outline: none;
+  width: 100%;
+  font-family: var(--font-mono);
+  font-size: 12px;
+}
