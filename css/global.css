@@ -1,0 +1,133 @@
+:root {
+  --fondo-principal: #D5E1D4;
+  --fondo-secundario: #EAF2E8;
+  --acento-verde: #87A96B;
+  --acento-oscuro: #557A46;
+  --texto-principal: #2C402E;
+  --texto-claro: #EAF2E8;
+  --color-borde: #2C402E;
+  --fuente-mono: 'Space Mono', monospace;
+  --fuente-pixel: 'VT323', monospace;
+ 
+  /* Alias compatibles con cabecera.css */
+  --bg-primary: var(--fondo-principal);
+  --bg-secondary: var(--fondo-secundario);
+  --accent-green: var(--acento-verde);
+  --text-main: var(--texto-principal);
+  --text-light: var(--texto-claro);
+  --border-color: var(--color-borde);
+  --font-mono: var(--fuente-mono);
+  --font-pixel: var(--fuente-pixel);
+}
+ 
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+ 
+body {
+  background-color: #6B8E62;
+  font-family: var(--fuente-mono);
+  color: var(--texto-principal);
+  padding: 10px;
+}
+ 
+/* Pantalla de carga / Spinner */
+.cargador {
+  position: fixed;
+  inset: 0;
+  background-color: var(--fondo-principal);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+  z-index: 9999;
+  font-family: var(--fuente-pixel);
+  font-size: 24px;
+}
+ 
+.cargador__aro {
+  width: 48px;
+  height: 48px;
+  border: 5px solid var(--fondo-secundario);
+  border-top-color: var(--acento-oscuro);
+  border-right-color: var(--acento-verde);
+  border-radius: 50%;
+  animation: girar 1s linear infinite;
+}
+ 
+.cargador__texto {
+  font-family: var(--fuente-pixel);
+  font-size: 24px;
+}
+ 
+@keyframes girar {
+  100% {
+    transform: rotate(360deg);
+  }
+}
+ 
+/* Marco general y diseño de tienda */
+.marco-ventana {
+  background-color: var(--fondo-principal);
+  border: 2px solid var(--color-borde);
+  min-height: 95vh;
+  display: flex;
+  flex-direction: column;
+}
+ 
+.diseno-tienda {
+  display: flex;
+  align-items: flex-start;
+  padding: 20px;
+  gap: 20px;
+  flex-grow: 1;
+}
+ 
+.seccion-principal {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  min-width: 0;
+}
+ 
+/* Botones */
+.boton {
+  background-color: var(--fondo-secundario);
+  color: var(--texto-principal);
+  border: 2px solid var(--color-borde);
+  padding: 6px 12px;
+  font-family: var(--fuente-mono);
+  font-size: 12px;
+  font-weight: bold;
+  cursor: pointer;
+  border-radius: 4px;
+  box-shadow: 2px 2px 0 var(--color-borde);
+}
+ 
+.boton:active {
+  transform: translate(1px, 1px);
+}
+ 
+.boton--ancho-completo {
+  width: 100%;
+}
+ 
+.boton--admin {
+  padding: 6px 10px;
+}
+ 
+.boton--whatsapp {
+  background-color: #25D366;
+  color: #FFFFFF;
+  border-color: #1B7A3A;
+}
+ 
+.boton--terminal {
+  background-color: #55FF77;
+  color: #0B1710;
+  border-color: #55FF77;
+  box-shadow: none;
+}
